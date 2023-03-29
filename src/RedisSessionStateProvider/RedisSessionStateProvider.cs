@@ -12,7 +12,7 @@ using Microsoft.AspNet.SessionState;
 
 namespace Microsoft.Web.Redis
 {
-    internal class RedisSessionStateProvider : SessionStateStoreProviderAsyncBase
+    public class RedisSessionStateProvider : SessionStateStoreProviderAsyncBase
     {
         // We want to release lock (if exists) during EndRequest, to do that we need session-id and lockId but EndRequest do not have these parameter passed to it.
         // So we are going to store 'sessionId' and 'lockId' when we acquire lock. so that EndRequest can release lock at the end.
@@ -53,7 +53,7 @@ namespace Microsoft.Web.Redis
             }
         }
 
-        protected virtual void GetAccessToStore(string id)
+        private void GetAccessToStore(string id)
         {
             if (cache == null)
             {
